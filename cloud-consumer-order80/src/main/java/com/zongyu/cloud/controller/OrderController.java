@@ -8,11 +8,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -87,5 +91,29 @@ public class OrderController {
     @GetMapping(value = "/consumer/pay/error")
     public ResultData<Integer> error() {
         return restTemplate.getForObject(PAYMENT_SRV_URL + "/pay/error", ResultData.class);
+    }
+
+    @GetMapping(value = "/consumer/pay/get/info")
+    public String info() {
+        return restTemplate.getForObject(PAYMENT_SRV_URL + "/pay/get/info", String.class);
+    }
+
+    @Resource
+    private DiscoveryClient discoveryClient;
+
+    @GetMapping(value = "/consumer/discovery")
+    public String discovery() {
+        List<String> services = discoveryClient.getServices();
+        for (String element : services) {
+            System.out.println(element);
+        }
+
+        System.out.println("---------");
+
+        List<ServiceInstance> instances = discoveryClient.getInstances("cloud-payment-service");
+        for (ServiceInstance element : instances) {
+            System.out.println(element.getServiceId() + "\t" + element.getHost() + "\t" + element.getPort() + "\t" + element.getUri());
+        }
+        return instances.get(0).getInstanceId() + ":" + instances.get(0).getPort();
     }
 }
