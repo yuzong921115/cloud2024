@@ -1,4 +1,4 @@
-# Maven父工程步骤
+# 一、Maven父工程步骤
 ## 1、New Project
 ![img.png](img.png)
 ## 2、聚合总父工程名字
@@ -11,7 +11,7 @@
 ## 6、File Type过滤
 ![img_4.png](img_4.png)
 
-# 微服务小口诀
+# 二、微服务小口诀
 ## 1、建module
 ## 2、改pom
 ## 3、写yaml
