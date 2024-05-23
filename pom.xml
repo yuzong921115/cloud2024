@@ -11,6 +11,7 @@
         <module>mybatis-generator2024</module>
         <module>cloud-provider-payment8001</module>
         <module>cloud-consumer-order8002</module>
+        <module>cloud-common-api</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -32,6 +33,7 @@
         <spring.boot.version>3.2.0</spring.boot.version>
         <spring.cloud.version>2023.0.0</spring.cloud.version>
         <spring.cloud.alibaba.version>2022.0.0.0-RC2</spring.cloud.alibaba.version>
+        <common-api>1.0-SNAPSHOT</common-api>
     </properties>
 
     <!-- 父级版本管理，子模块只需引入需要的模块，默认取父版本，若子模块指定版本则用新指定的版本 -->
@@ -109,6 +111,11 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring.boot.test.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zongyu.cloud</groupId>
+                <artifactId>cloud-common-api</artifactId>
+                <version>${common-api}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

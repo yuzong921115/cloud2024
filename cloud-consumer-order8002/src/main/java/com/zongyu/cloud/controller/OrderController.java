@@ -1,8 +1,8 @@
 package com.zongyu.cloud.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.zongyu.cloud.enums.ReturnCodeEnum;
-import com.zongyu.cloud.model.PayDTO;
+import com.zongyu.cloud.model.PayBaseDTO;
+import com.zongyu.cloud.model.PayExtDTO;
 import com.zongyu.cloud.resp.ResultData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @Slf4j
@@ -27,8 +25,8 @@ public class OrderController {
 
     @PostMapping(value = "/consumer/pay/add")
     @Operation(summary = "新增", description = "新增支付流水方法，JSON串做参数")
-    public ResultData addOrder(@RequestBody PayDTO payDTO) {
-        return restTemplate.postForObject(PAYMENT_SRV_URL + "/pay/add", payDTO, ResultData.class);
+    public ResultData addOrder(@RequestBody PayBaseDTO payBaseDTO) {
+        return restTemplate.postForObject(PAYMENT_SRV_URL + "/pay/add", payBaseDTO, ResultData.class);
     }
 
     @DeleteMapping(value = "/consumer/pay/delete/{id}")
@@ -46,12 +44,12 @@ public class OrderController {
 
     @PutMapping(value = "/consumer/pay/update")
     @Operation(summary = "修改", description = "修改支付流水方法，JSON串做参数")
-    public ResultData updateOrder(@RequestBody PayDTO payDTO) {
+    public ResultData updateOrder(@RequestBody PayExtDTO payExtDTO) {
         // 请求头
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         // 发送请求
-        HttpEntity<PayDTO> entity = new HttpEntity<>(payDTO, headers);
+        HttpEntity<PayExtDTO> entity = new HttpEntity<>(payExtDTO, headers);
         // put请求
         ResponseEntity<ResultData> resultEntity = restTemplate.exchange(PAYMENT_SRV_URL + "/pay/update", HttpMethod.PUT, entity, ResultData.class, new HashMap<>());
         if (resultEntity != null) {

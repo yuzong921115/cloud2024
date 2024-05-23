@@ -69,6 +69,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.zongyu.cloud</groupId>
+            <artifactId>cloud-common-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
