@@ -19,7 +19,7 @@ import java.util.HashMap;
 @Tag(name = "订单微服务模块", description = "订单CRUD")
 public class OrderController {
 
-    public static final String PAYMENT_SRV_URL = "http://localhost:8001";
+    public static final String PAYMENT_SRV_URL = "http://cloud-payment-service";
     @Resource
     private RestTemplate restTemplate;
 
