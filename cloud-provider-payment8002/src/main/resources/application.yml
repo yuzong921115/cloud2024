@@ -1,0 +1,23 @@
+server:
+  port: 8002
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.4.111:3306/db2024?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: zongyu
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: dev #多环境配置，不写是default
+
+  # springboot项目可以用yml配置，也可在需要的字段上增加注解：@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zongyu.cloud.model
+  configuration:
+    map-underscore-to-camel-case: true

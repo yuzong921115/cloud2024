@@ -90,7 +90,7 @@ public class PayController {
 
     @GetMapping(value = "/pay/get/info")
     public String info(@Value("${zongyu.info}") String zongyuInfo) {
-        log.info("访问8001");
+        log.info("访问8002");
         return "consul:" + zongyuInfo + "，端口号：" + port;
     }
 }
