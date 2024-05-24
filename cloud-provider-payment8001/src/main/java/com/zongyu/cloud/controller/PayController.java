@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -52,17 +53,18 @@ public class PayController {
     @GetMapping(value = "/pay/get/{id}")
     @Operation(summary = "获取指定id支付流水", description = "获取单条支付流水")
     public ResultData<Pay> getById(@PathVariable("id") Integer id) {
+        log.info("come.......{}", System.currentTimeMillis());
         // 测试全局异常使用
         if (id == -4) {
             throw new RuntimeException("id不能为负数");
         }
 
         // 测试超时
-//        try {
-//            TimeUnit.SECONDS.sleep(62);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            TimeUnit.SECONDS.sleep(62);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Pay pay = payService.getById(id);
         return ResultData.success(pay);

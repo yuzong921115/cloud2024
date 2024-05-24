@@ -1,6 +1,8 @@
 package com.zongyu.cloud.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.zongyu.cloud.apis.PayFeignClient;
+import com.zongyu.cloud.enums.ReturnCodeEnum;
 import com.zongyu.cloud.model.PayBaseDTO;
 import com.zongyu.cloud.model.PayExtDTO;
 import com.zongyu.cloud.resp.ResultData;
@@ -40,14 +42,14 @@ public class OrderController {
     public ResultData getById(@PathVariable("id") Integer id) {
         log.info("开始调用。。。。。");
         ResultData resultData = null;
-//        try {
-//            log.info("开始调用1。。。。。{}", DateUtil.now());
+        try {
+            log.info("开始调用1。。。。。{}", DateUtil.now());
             resultData = payFeignClient.getById(id);
-//        } catch (Exception e) {
+        } catch (Exception e) {
 //            e.printStackTrace();
-//            log.info("开始调用2。。。。。{}", DateUtil.now());
-//            return ResultData.fail(ReturnCodeEnum.RC500.getCode(), e.getMessage());
-//        }
+            log.info("开始调用2。。。。。{}", DateUtil.now());
+            return ResultData.fail(ReturnCodeEnum.RC500.getCode(), e.getMessage());
+        }
         return resultData;
     }
 

@@ -16,14 +16,32 @@ spring:
     openfeign:
       client:
         config:
-          default:
-            connectTimeout: 3000 # 连接超时时间，打通网络连接
-            readTimeout: 3000 #读取超时时间，业务处理
-#          cloud-payment-service:
-#            connectTimeout: 5000 # 连接超时时间，打通网络连接
-#            readTimeout: 5000 #读取超时时间，业务处理
+#          default:
+#            connectTimeout: 2000 # 连接超时时间，打通网络连接
+#            readTimeout: 2000 #读取超时时间，业务处理
+          cloud-payment-service:
+            connectTimeout: 2000 # 连接超时时间，打通网络连接
+            readTimeout: 2000 #读取超时时间，业务处理
+      httpclient:
+        hc5:
+          enabled: true
+      compression: #开启压缩，节省带宽
+        request:
+          enabled: true
+          min-request-size: 2048 # 最小触发压缩的大小  单位是B，默认是2KB就启用压缩
+          min-type: text/xml,application/xml,application/json # 触发压缩的数据类型
+        response:
+          enabled: true
 
   # springboot项目可以用yml配置，也可在需要的字段上增加注解：@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+logging:
+  level:
+    com: #开启指定模块的日志打印 包名+类名
+      zongyu:
+        cloud:
+          apis:
+            PayFeignClient: debug
