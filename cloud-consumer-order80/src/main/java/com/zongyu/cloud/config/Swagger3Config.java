@@ -29,5 +29,5 @@ public class Swagger3Config {
                         .description("www.zongyu.com")
                         .url("https://www.baidu.com"));
     }
-    // swagger访问地址：http://localhost:8001/swagger-ui/index.html
+    // swagger访问地址：http://localhost:80/swagger-ui/index.html
 }
