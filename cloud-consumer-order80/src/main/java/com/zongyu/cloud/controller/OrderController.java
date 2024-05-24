@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
@@ -75,13 +74,11 @@ public class OrderController {
         return restTemplate.getForObject(PAYMENT_SRV_URL + "/pay/get/" + id, ResultData.class);
     }
 
-    //
     @GetMapping(value = "/consumer/pay/getAll")
     @Operation(summary = "获取全部支付流水", description = "获取多条支付流水")
     public ResultData getAll() {
         return restTemplate.getForObject(PAYMENT_SRV_URL + "/pay/getAll", ResultData.class);
     }
-//
 
     /**
      * 不使用全局异常，手动写异常demo
