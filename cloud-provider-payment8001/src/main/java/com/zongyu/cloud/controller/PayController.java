@@ -57,6 +57,13 @@ public class PayController {
             throw new RuntimeException("id不能为负数");
         }
 
+        // 测试超时
+//        try {
+//            TimeUnit.SECONDS.sleep(62);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         Pay pay = payService.getById(id);
         return ResultData.success(pay);
     }

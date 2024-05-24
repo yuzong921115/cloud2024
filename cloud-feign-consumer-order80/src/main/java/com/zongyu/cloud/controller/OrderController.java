@@ -38,7 +38,17 @@ public class OrderController {
     @GetMapping(value = "/feign/consumer/pay/get/{id}")
     @Operation(summary = "获取指定id支付流水", description = "获取单条支付流水")
     public ResultData getById(@PathVariable("id") Integer id) {
-        return payFeignClient.getById(id);
+        log.info("开始调用。。。。。");
+        ResultData resultData = null;
+//        try {
+//            log.info("开始调用1。。。。。{}", DateUtil.now());
+            resultData = payFeignClient.getById(id);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.info("开始调用2。。。。。{}", DateUtil.now());
+//            return ResultData.fail(ReturnCodeEnum.RC500.getCode(), e.getMessage());
+//        }
+        return resultData;
     }
 
     @GetMapping(value = "/feign/consumer/pay/getAll")
