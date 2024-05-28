@@ -38,10 +38,10 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-logging:
-  level:
-    com: #开启指定模块的日志打印 包名+类名
-      zongyu:
-        cloud:
-          apis:
-            PayFeignClient: debug
+#logging:
+#  level:
+#    com: #开启指定模块的日志打印 包名+类名
+#      zongyu:
+#        cloud:
+#          apis:
+#            PayFeignClient: debug
