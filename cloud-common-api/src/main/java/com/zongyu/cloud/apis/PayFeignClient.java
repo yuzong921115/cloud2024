@@ -46,4 +46,7 @@ public interface PayFeignClient {
 
     @GetMapping(value = "/pay/bulkhead/{id}")
     String myCircuit2(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/pay/ratelimit/{id}")
+    String myRateLimit(@PathVariable("id") Integer id);
 }

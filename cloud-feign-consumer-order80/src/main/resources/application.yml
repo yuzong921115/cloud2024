@@ -109,17 +109,29 @@ spring:
 # resilience4j bulkhead 线程池示例
 # 注意，请设置为false，新启线程和原来主线程脱离
 # spring.cloud.openfeign.circuitbreaker.group.enabled
+#resilience4j:
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 10s # 默认限制远程1秒，方便显示改为10秒
+#  thread-pool-bulkhead:
+#    configs:
+#      default: # 注意max-thread-pool-size包含了core-thread-pool-size，所以这里只有2个线程正常访问
+#        core-thread-pool-size: 1
+#        max-thread-pool-size: 1
+#        queue-capacity: 1
+#    instances:
+#      cloud-payment-service:
+#        baseConfig: default
+
+# resilience4j 限流
 resilience4j:
-  timelimiter:
+  ratelimiter:
     configs:
       default:
-        timeout-duration: 10s # 默认限制远程1秒，方便显示改为10秒
-  thread-pool-bulkhead:
-    configs:
-      default: # 注意max-thread-pool-size包含了core-thread-pool-size，所以这里只有2个线程正常访问
-        core-thread-pool-size: 1
-        max-thread-pool-size: 1
-        queue-capacity: 1
+        limitForPeriod: 2 # 再一次刷新周期内，允许执行的最大请求数
+        limitRefreshPeriod: 1s # 限流器每隔limitRefreshPeriod刷新一次，将允许处理的最大请求数量重置为limitForPeriod
+        timeout-duration: 1 # 线程等待权限的默认等待时间
     instances:
       cloud-payment-service:
         baseConfig: default
