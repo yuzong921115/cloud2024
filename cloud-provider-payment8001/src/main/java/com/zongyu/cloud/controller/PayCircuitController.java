@@ -24,4 +24,20 @@ public class PayCircuitController {
         }
         return "hello,circuit inputId:" + id + "\t" + IdUtil.simpleUUID();
     }
+
+    @GetMapping(value = "/pay/bulkhead/{id}")
+    public String myCircuit2(@PathVariable("id") Integer id) {
+        if (id == -4) {
+            throw new RuntimeException("---circuit id 不能为负数");
+        }
+
+        if (id == 9999) {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return "hello,bulkhead inputId:" + id + "\t" + IdUtil.simpleUUID();
+    }
 }
