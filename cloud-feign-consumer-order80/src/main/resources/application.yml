@@ -32,8 +32,8 @@ spring:
           min-type: text/xml,application/xml,application/json # 触发压缩的数据类型
         response:
           enabled: true
-      circuitbreaker: #开启circuitbreaker和分组激活
-        enabled: true
+#      circuitbreaker: #开启circuitbreaker和分组激活
+#        enabled: true
 #        group:
 #          enabled: true # 没开分组永远不用分组的配置，精确邮箱，分组次之，默认最后
 
@@ -125,13 +125,22 @@ spring:
 #        baseConfig: default
 
 # resilience4j 限流
-resilience4j:
-  ratelimiter:
-    configs:
-      default:
-        limitForPeriod: 2 # 再一次刷新周期内，允许执行的最大请求数
-        limitRefreshPeriod: 1s # 限流器每隔limitRefreshPeriod刷新一次，将允许处理的最大请求数量重置为limitForPeriod
-        timeout-duration: 1 # 线程等待权限的默认等待时间
-    instances:
-      cloud-payment-service:
-        baseConfig: default
+#resilience4j:
+#  ratelimiter:
+#    configs:
+#      default:
+#        limitForPeriod: 2 # 再一次刷新周期内，允许执行的最大请求数
+#        limitRefreshPeriod: 1s # 限流器每隔limitRefreshPeriod刷新一次，将允许处理的最大请求数量重置为limitForPeriod
+#        timeout-duration: 1 # 线程等待权限的默认等待时间
+#    instances:
+#      cloud-payment-service:
+#        baseConfig: default
+
+#zipkin
+management:
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 # 采样率默认为0.1（10次只有有一次记录下来），值越大收集越及时

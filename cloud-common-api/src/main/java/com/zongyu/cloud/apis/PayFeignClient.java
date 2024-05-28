@@ -49,4 +49,7 @@ public interface PayFeignClient {
 
     @GetMapping(value = "/pay/ratelimit/{id}")
     String myRateLimit(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/pay/micrometer/{id}")
+    String myMicrometer(@PathVariable("id") Integer id);
 }

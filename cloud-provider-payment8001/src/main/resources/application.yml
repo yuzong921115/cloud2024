@@ -21,3 +21,12 @@ mybatis:
   type-aliases-package: com.zongyu.cloud.model
   configuration:
     map-underscore-to-camel-case: true
+
+#zipkin
+management:
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 # 采样率默认为0.1（10次只有有一次记录下来），值越大收集越及时
