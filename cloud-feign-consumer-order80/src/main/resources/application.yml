@@ -34,8 +34,8 @@ spring:
           enabled: true
       circuitbreaker: #开启circuitbreaker和分组激活
         enabled: true
-        group:
-          enabled: true # 没开分组永远不用分组的配置，精确邮箱，分组次之，默认最后
+#        group:
+#          enabled: true # 没开分组永远不用分组的配置，精确邮箱，分组次之，默认最后
 
   # springboot项目可以用yml配置，也可在需要的字段上增加注解：@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   jackson:
@@ -91,17 +91,35 @@ spring:
 #      cloud-payment-service:
 #        baseConfig: default
 
-# resilience4j bulkhead示例
+# resilience4j bulkhead 信号量示例
+#resilience4j:
+#  bulkhead:
+#    configs:
+#      default:
+#        maxConcurrentCalls: 2 # 隔离允许并发线程执行的最大数量
+#        maxWaitDuration: 1s # 当达到并发调用数量时，新的线程的阻塞时间，只等1秒，超过就走兜底方法
+#    instances:
+#      cloud-payment-service:
+#        baseConfig: default
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 20s
+
+# resilience4j bulkhead 线程池示例
+# 注意，请设置为false，新启线程和原来主线程脱离
+# spring.cloud.openfeign.circuitbreaker.group.enabled
 resilience4j:
-  bulkhead:
-    configs:
-      default:
-        maxConcurrentCalls: 2 # 隔离允许并发线程执行的最大数量
-        maxWaitDuration: 1s # 当达到并发调用数量时，新的线程的阻塞时间，只等1秒，超过就走兜底方法
-    instances:
-      cloud-payment-service:
-        baseConfig: default
   timelimiter:
     configs:
       default:
-        timeout-duration: 20s
+        timeout-duration: 10s # 默认限制远程1秒，方便显示改为10秒
+  thread-pool-bulkhead:
+    configs:
+      default: # 注意max-thread-pool-size包含了core-thread-pool-size，所以这里只有2个线程正常访问
+        core-thread-pool-size: 1
+        max-thread-pool-size: 1
+        queue-capacity: 1
+    instances:
+      cloud-payment-service:
+        baseConfig: default
