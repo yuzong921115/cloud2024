@@ -50,19 +50,43 @@ spring:
 #          apis:
 #            PayFeignClient: debug
 
-resilience4j:
-  circuitbreaker:
-    configs:
-      default:
-        failureRateThreshold: 50 # 设置50%的调用失败时打开断路器，超过失败请求百分比CircuitBreaker变为OPEN状态
-        slidingWindowType: COUNT_BASED # 滑动窗口类型
-        slidingWindowSize: 6 #滑动窗口的大小配置COUNT_BASED表示6个请求，配置TIME_BASED表示6秒
-        minimumNumberOfCalls: 6 # 断路器计算失败率或慢调用率之前所需的最小样本
-        automaticTransitionFromOpenToHalfOpenEnabled: true # 是否开启自动从开启状态到半开启状态，默认值为启用
-        waitDurationInOpenState: 5s # 从OPEN到HALF_OPEN需要等待时间
-        permittedNumberOfCallsInHalfOpenState: 2 # 半开启状态允许最大请求数，默认值为10
-        recordExceptions:
-          - java.lang.Exception
-    instances:
-      cloud-payment-service:
-        baseConfig: default
+# 基于次数
+#resilience4j:
+#  circuitbreaker:
+#    configs:
+#      default:
+#        failureRateThreshold: 50 # 设置50%的调用失败时打开断路器，超过失败请求百分比CircuitBreaker变为OPEN状态
+#        slidingWindowType: COUNT_BASED # 滑动窗口类型
+#        slidingWindowSize: 6 #滑动窗口的大小配置COUNT_BASED表示6个请求，配置TIME_BASED表示6秒
+#        minimumNumberOfCalls: 6 # 断路器计算失败率或慢调用率之前所需的最小样本
+#        automaticTransitionFromOpenToHalfOpenEnabled: true # 是否开启自动从开启状态到半开启状态，默认值为启用
+#        waitDurationInOpenState: 5s # 从OPEN到HALF_OPEN需要等待时间
+#        permittedNumberOfCallsInHalfOpenState: 2 # 半开启状态允许最大请求数，默认值为10
+#        recordExceptions:
+#          - java.lang.Exception
+#    instances:
+#      cloud-payment-service:
+#        baseConfig: default
+
+# 基于次数
+#resilience4j:
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 10s # 注意，默认限制远程1s，超过1s就超时，配置了降级，就走降级逻辑
+#  circuitbreaker:
+#    configs:
+#      default:
+#        failureRateThreshold: 50 # 设置50%的调用失败时打开断路器，超过失败请求百分比CircuitBreaker变为OPEN状态
+#        slowCallDurationThreshold: 2s # 慢调用阈值，高于这个阈值视为慢调用并增加调用比例
+#        slowCallRateThreshold: 30 # 慢调用比例峰值
+#        slidingWindowType: TIME_BASED # 滑动窗口类型
+#        slidingWindowSize: 2 #滑动窗口的大小配置COUNT_BASED表示2个请求，配置TIME_BASED表示2秒
+#        minimumNumberOfCalls: 2 # 断路器计算失败率或慢调用率之前所需的最小样本
+#        waitDurationInOpenState: 5s # 从OPEN到HALF_OPEN需要等待时间
+#        permittedNumberOfCallsInHalfOpenState: 2 # 半开启状态允许最大请求数，默认值为10
+#        recordExceptions:
+#          - java.lang.Exception
+#    instances:
+#      cloud-payment-service:
+#        baseConfig: default
