@@ -20,8 +20,8 @@ spring:
 #            connectTimeout: 2000 # 连接超时时间，打通网络连接
 #            readTimeout: 2000 #读取超时时间，业务处理
           cloud-payment-service:
-            connectTimeout: 2000 # 连接超时时间，打通网络连接
-            readTimeout: 2000 #读取超时时间，业务处理
+            connectTimeout: 20000 # 连接超时时间，打通网络连接
+            readTimeout: 20000 #读取超时时间，业务处理
       httpclient:
         hc5:
           enabled: true
@@ -32,6 +32,10 @@ spring:
           min-type: text/xml,application/xml,application/json # 触发压缩的数据类型
         response:
           enabled: true
+      circuitbreaker: #开启circuitbreaker和分组激活
+        enabled: true
+        group:
+          enabled: true # 没开分组永远不用分组的配置，精确邮箱，分组次之，默认最后
 
   # springboot项目可以用yml配置，也可在需要的字段上增加注解：@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   jackson:
@@ -45,3 +49,20 @@ spring:
 #        cloud:
 #          apis:
 #            PayFeignClient: debug
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failureRateThreshold: 50 # 设置50%的调用失败时打开断路器，超过失败请求百分比CircuitBreaker变为OPEN状态
+        slidingWindowType: COUNT_BASED # 滑动窗口类型
+        slidingWindowSize: 6 #滑动窗口的大小配置COUNT_BASED表示6个请求，配置TIME_BASED表示6秒
+        minimumNumberOfCalls: 6 # 断路器计算失败率或慢调用率之前所需的最小样本
+        automaticTransitionFromOpenToHalfOpenEnabled: true # 是否开启自动从开启状态到半开启状态，默认值为启用
+        waitDurationInOpenState: 5s # 从OPEN到HALF_OPEN需要等待时间
+        permittedNumberOfCallsInHalfOpenState: 2 # 半开启状态允许最大请求数，默认值为10
+        recordExceptions:
+          - java.lang.Exception
+    instances:
+      cloud-payment-service:
+        baseConfig: default
