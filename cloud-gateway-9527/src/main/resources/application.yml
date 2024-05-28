@@ -1,0 +1,14 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+
+  # consul
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery: # 显示cloud-payment-service
+        service-name: ${spring.application.name}
