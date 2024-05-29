@@ -23,7 +23,9 @@ spring:
 #            - name: My
 #              args:
 #                userType: diamond
-            - My=diamond
+
+#            - My=diamond
+
 #            - Query=color,green
 #            - RemoteAddr=192.168.4.1/24
 #            - Method=GET,POST
@@ -34,7 +36,27 @@ spring:
 #            - Before=2024-05-29T10:15:46.345946500+08:00[Asia/Shanghai] # 在指定日期之前，可访问
 #            - After=2024-05-29T11:15:46.345946500+08:00[Asia/Shanghai] # 在指定日期之后，可访问
 
-        - id: pay_routh1
+        - id: pay_routh2
+          uri: lb://cloud-payment-service
+          predicates:
+#            - Path=/XYZ/abc/{segment}
+#            - Path=/pay/gateway/filter/**
+            - Path=/gateway/filter/**
+          filters:
+            - PrefixPath=/pay
+#            - RedirectTo=302, http://www.baidu.com
+#            - SetPath=/pay/gateway/{segment}
+#            - AddRequestHeader=X-Request-zongyu1, zongyuvalue1
+#            - AddRequestHeader=X-Request-zongyu2, zongyuvalue2
+#            - RemoveRequestHeader=zc
+#            - SetRequestHeader=jh, Blue
+#            - AddRequestParameter=customerId, 963258
+#            - RemoveRequestParameter=customerName
+#            - AddResponseHeader=X-Response-Red, Blue
+#            - RemoveResponseHeader=Content-Type
+#            - SetResponseHeader=Date, 2035-10-01
+
+        - id: pay_routh3
           #          uri: http://localhost:8001 # 匹配后提供服务的路由地址
           uri: lb://cloud-payment-service # 匹配后提供服务的路由地址
           predicates:

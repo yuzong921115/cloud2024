@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * 需求说明：自定义会员等级
+ * 需求说明：自定义会员等级 参考org.springframework.cloud.gateway.handler.predicate.AfterRoutePredicateFactory
  */
 @Component
 public class MyRoutePredicateFactory extends AbstractRoutePredicateFactory<MyRoutePredicateFactory.Config> {
