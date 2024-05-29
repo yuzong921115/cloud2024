@@ -40,10 +40,11 @@ spring:
           uri: lb://cloud-payment-service
           predicates:
 #            - Path=/XYZ/abc/{segment}
-#            - Path=/pay/gateway/filter/**
-            - Path=/gateway/filter/**
+            - Path=/pay/gateway/filter/**
+#            - Path=/gateway/filter/**
           filters:
-            - PrefixPath=/pay
+#            - My=zongyu
+#            - PrefixPath=/pay
 #            - RedirectTo=302, http://www.baidu.com
 #            - SetPath=/pay/gateway/{segment}
 #            - AddRequestHeader=X-Request-zongyu1, zongyuvalue1
