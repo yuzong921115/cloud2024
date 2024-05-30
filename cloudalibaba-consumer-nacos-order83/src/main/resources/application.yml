@@ -1,0 +1,20 @@
+server:
+  port: 83
+
+spring:
+  #  datasource:
+  #    type: com.alibaba.druid.pool.DruidDataSource
+  #    url: jdbc:mysql://192.168.4.111:3306/db2024?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+  #    username: root
+  #    password: zongyu
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: nacos-order-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+# 消费者将要去访问的微服务名称
+service-url:
+  nacos-user-service: http://nacos-payment-provider
