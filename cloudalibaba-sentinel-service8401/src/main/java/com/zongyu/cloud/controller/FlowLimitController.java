@@ -5,6 +5,8 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 public class FlowLimitController {
     @Resource
@@ -43,5 +45,38 @@ public class FlowLimitController {
     @GetMapping("/testE")
     public void testE() {
         System.out.println("排队等待testE");
+    }
+
+    /**
+     * 熔断 慢调用比例
+     */
+    @GetMapping("/testF")
+    public String testF() {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "熔断慢调用比例";
+    }
+
+    /**
+     * 熔断 异常比例
+     */
+    @GetMapping("/testG")
+    public String testG() {
+        System.out.println("come in testG");
+        int age = 10 / 0;
+        return "异常比例";
+    }
+
+    /**
+     * 熔断 异常数
+     */
+    @GetMapping("/testH")
+    public String testH() {
+        System.out.println("come in testH");
+        int age = 10 / 0;
+        return "异常数";
     }
 }
