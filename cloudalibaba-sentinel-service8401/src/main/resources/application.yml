@@ -15,3 +15,13 @@ spring:
         dashboard: localhost:8080 # 配置sentinel dashboard控制台服务地址
         port: 8719 # 默认8719端口，如被占用则自动从8719开始一次+1扫描，直到未被占用
       web-context-unify: false # controller层的方法对service层调用不认为时同一个根链路
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow #com.alibaba.cloud.sentinel.datasource.RuleType
