@@ -43,12 +43,15 @@
         <spring.boot.test.version>3.1.5</spring.boot.test.version>
 
         <!--        日常案例使用-->
-<!--                <spring.boot.version>3.2.0</spring.boot.version>-->
-<!--                <spring.cloud.version>2023.0.0</spring.cloud.version>-->
+        <!--                <spring.boot.version>3.2.0</spring.boot.version>-->
+        <!--                <spring.cloud.version>2023.0.0</spring.cloud.version>-->
 
         <!--        仅为了测试OpenFeign和Sentinel集成实现fallback服务降级-->
-        <spring.boot.version>3.0.9</spring.boot.version>
-                <spring.cloud.version>2022.0.2</spring.cloud.version>
+        <!--        <spring.boot.version>3.0.9</spring.boot.version>-->
+        <!--                <spring.cloud.version>2022.0.2</spring.cloud.version>-->
+        <!--        仅为测试seata,也可用3.0.9和2022.0.2-->
+        <spring.boot.version>3.1.7</spring.boot.version>
+        <spring.cloud.version>2022.0.4</spring.cloud.version>
 
         <spring.cloud.alibaba.version>2022.0.0.0-RC2</spring.cloud.alibaba.version>
         <common-api>1.0-SNAPSHOT</common-api>
