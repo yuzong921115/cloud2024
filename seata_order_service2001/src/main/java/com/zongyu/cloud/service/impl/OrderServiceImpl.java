@@ -6,6 +6,7 @@ import com.zongyu.cloud.mapper.OrderMapper;
 import com.zongyu.cloud.model.Order;
 import com.zongyu.cloud.service.OrderService;
 import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
     private AccountFeignApi accountFeignApi;
 
     @Override
-//    @GlobalTransactional
+    @GlobalTransactional(name = "zongyu_create_order", rollbackFor = Exception.class)
     public void create(Order order) {
         // 全局事务ID（xid）的检查，重要
         String xid = RootContext.getXID();
