@@ -1,0 +1,46 @@
+server:
+  port: 2002
+
+spring:
+  application:
+    name: seata-storage-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.4.111:3306/seata_storage?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: zongyu
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zongyu.cloud.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+# seata配置
+seata:
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      namespace: ""
+      group: SEATA_GROUP
+      application: seata-server
+  tx-service-group: default_tx_group # 事务组，有它获得TC服务的集群名称
+  service:
+    vgroup-mapping: # 点击源码分析
+      default_tx_group: default # 事务组与TC服务集群的映射关系
+  data-source-proxy-mode: AT # 默认是AT
+
+logging:
+  level:
+    io:
+      seata: info
