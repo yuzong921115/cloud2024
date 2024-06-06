@@ -7,9 +7,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mybatis-generator2024" />
+        <module name="cloudalibaba-config-nacos-client3377" />
+        <module name="cloud-provider-payment8002" />
         <module name="cloud-provider-payment8001" />
+        <module name="prcatice2024" />
+        <module name="cloud-gateway-9527" />
+        <module name="cloudalibaba-sentinel-gateway9528" />
+        <module name="mybatis-generator2024" />
+        <module name="cloudalibaba-provider-payment9001" />
+        <module name="cloudalibaba-consumer-nacos-order83" />
+        <module name="cloud-common-api" />
+        <module name="cloud-consumer-order80" />
+        <module name="cloud-feign-consumer-order80" />
+        <module name="cloudalibaba-sentinel-service8401" />
+        <module name="seata_order_service2001" />
+        <module name="seata_storage_service2002" />
+        <module name="seata_account_service2003" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="juc" target="1.8" />
+      <module name="juc-practice" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
